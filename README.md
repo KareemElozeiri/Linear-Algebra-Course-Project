@@ -1,3 +1,3 @@
 ## Linear-Algebra-Course-Project
-                    A UI-based tool for applying linear algebra taken at class in  the field of image processing where it uses blurring 
-    and de-blurring algorithms like Gaussian blur algorithm.
+  This is a UI-based tool which demonstrates the effects of image processing algorithms for blurring and de-blurring like Gaussian blur. It was built as a project to apply the concepts learned at the linear algebra class.
+                 
