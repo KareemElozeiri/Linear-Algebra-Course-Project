@@ -3,6 +3,7 @@ from kivy.app import App
 from kivy.uix.label import Label 
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button  
+from kivy.uix.screenmanager import ScreenManager, Screen 
 from main_page import MainPage
 from processing_page import ProcessingPage 
 
@@ -15,9 +16,16 @@ class MyApp(App):
         self.title = "Matrix Effects"
 
     def build(self):
-        return MainPage()
-        #return ProcessingPage(cv2.imread("Ggstokes.jpg"))  
+        self.screen_manager = ScreenManager()
+        self.main_page = MainPage(self)
 
+        screen = Screen(name="main")
+        screen.add_widget(self.main_page)
+        self.screen_manager.add_widget(screen)
+
+
+
+        return self.screen_manager
 
 if __name__ == "__main__":
 

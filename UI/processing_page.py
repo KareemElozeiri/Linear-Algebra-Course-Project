@@ -12,10 +12,12 @@ import numpy as np
 
 class ProcessingPage(GridLayout):
 
-    def __init__(self,img,**kwargs):
+    def __init__(self,app,img,**kwargs):
         super(ProcessingPage,self).__init__(**kwargs)
+        
+        self.app = app
+        
         self.img = img
-
         self.img_texture = ""
         self.convert_to_texture()
         
@@ -43,11 +45,12 @@ class SideBar(GridLayout):
     def __init__(self,**kwargs):
         super(SideBar,self).__init__(**kwargs)
         self.cols = 1
-        
+        self.common_height = 50
+
         self.gauss_blur_sec = GaussBlurSec()
         self.add_widget(self.gauss_blur_sec)
 
-        self.save_subgrid = GridLayout(cols=2,size_hint_y=None,height=50)
+        self.save_subgrid = GridLayout(cols=2,size_hint_y=None,height=self.common_height)
 
         self.save_textinput = TextInput()
         
@@ -58,7 +61,7 @@ class SideBar(GridLayout):
         self.save_subgrid.add_widget(self.save_btn)
         self.add_widget(self.save_subgrid)
 
-        self.status_bar = Label(text="",size_hint_y=None,height=50)
+        self.status_bar = Label(text="",size_hint_y=None,height=self.common_height)
         self.add_widget(self.status_bar)
 
     def empty_status_bar(self,_):
@@ -74,11 +77,11 @@ class GaussBlurSec(GridLayout):
     def __init__(self,**kwargs):
         super(GaussBlurSec,self).__init__(**kwargs)
         self.cols = 1
-
-        self.label = Label(text="Guassian Blur",size_hint_y=None,height=50)
+        self.common_height = 50
+        self.label = Label(text="Guassian Blur",size_hint_y=None,height=self.common_height/2)
         self.add_widget(self.label)
 
-        self.subGrid0 = GridLayout(size_hint_y=None,height=50)
+        self.subGrid0 = GridLayout(size_hint_y=None,height=self.common_height)
         self.subGrid0.cols = 2
         self.kernel_size_label = Label(text="Kernel size:")
         self.kernel_size_textinput = TextInput(multiline=False)
@@ -88,7 +91,7 @@ class GaussBlurSec(GridLayout):
 
         self.add_widget(self.subGrid0)
 
-        self.apply_btn = Button(text="Apply Gauss",size_hint_y=None,height=50)
+        self.apply_btn = Button(text="Apply Gauss",size_hint_y=None,height=self.common_height)
         self.add_widget(self.apply_btn)
     
     
