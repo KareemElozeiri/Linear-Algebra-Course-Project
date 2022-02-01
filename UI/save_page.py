@@ -3,12 +3,13 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button 
 from kivy.uix.filechooser import FileChooserIconView 
 from kivy.uix.textinput import TextInput
+from kivy.uix.label import Label
 
 class SavePage(GridLayout):
     def __init__(self,app,**kwargs):
         super(SavePage,self).__init__(**kwargs)
         self.cols = 1
-        
+        self.padding = 10
         #file chooser
         self.file_chooser = FileChooserIconView()
         self.add_widget(self.file_chooser)
@@ -16,8 +17,15 @@ class SavePage(GridLayout):
         self.save_text_input = TextInput()
         #save button 
         self.save_btn = Button(text="save")
-        
-        save_section = GridLayout(cols=2,size_hint_y=None,height=50)
+        #status bar
+        self.status_bar = Label(size_hint_y=None,height=25)
+
+        save_section = GridLayout(cols=2,size_hint_y=None,height=25)
         save_section.add_widget(self.save_text_input)
         save_section.add_widget(self.save_btn)
         self.add_widget(save_section)
+        self.add_widget(self.status_bar)
+
+    def empty_status_bar(self,_):
+        self.status_bar.text = ""
+

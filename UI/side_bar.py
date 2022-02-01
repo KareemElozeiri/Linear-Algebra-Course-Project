@@ -55,7 +55,7 @@ class SideBar(GridLayout):
     def save_action(self):
         self.status_bar.text = "saving frame..."
         Clock.schedule_once(self.empty_status_bar,1)
-        self.master.app.screen_manager.current = "main"
+        Clock.schedule_once(self.master.app.switch_to_save)
       
 class EffectToolBox(GridLayout):
     def __init__(self,elements,**kwargs):

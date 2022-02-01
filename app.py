@@ -7,6 +7,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from UI.main_page import MainPage
 from UI.processing_page import ProcessingPage 
 from UI.load_page import LoadPage 
+from UI.save_page import SavePage
 import cv2 
 
 class MyApp(App):
@@ -27,6 +28,11 @@ class MyApp(App):
         self.load_page = LoadPage(self)
         screen = Screen(name="load")
         screen.add_widget(self.load_page)
+        self.screen_manager.add_widget(screen)
+        #save page 
+        self.save_page = SavePage(self)
+        screen = Screen(name="save")
+        screen.add_widget(self.save_page)
         self.screen_manager.add_widget(screen)
 
         return self.screen_manager
@@ -52,6 +58,9 @@ class MyApp(App):
     
     def switch_to_load(self,_):
         self.screen_manager.current = "load"
+    
+    def switch_to_save(self,_):
+        self.screen_manager.current = "save"
 
 if __name__ == "__main__":
     app = MyApp()
