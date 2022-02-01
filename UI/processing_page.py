@@ -13,12 +13,11 @@ import numpy as np
 
 class ProcessingPage(GridLayout):
 
-    def __init__(self,app,img,**kwargs):
+    def __init__(self,app,**kwargs):
         super(ProcessingPage,self).__init__(**kwargs)
         
         self.app = app
         
-        self.img = img
         self.img_texture = ""
         self.convert_to_texture()
         
@@ -35,9 +34,9 @@ class ProcessingPage(GridLayout):
 
     #converts the image(numpy array) to the appropriate formate to be read by the image object of kivy
     def convert_to_texture(self,colorfmt="bgr"):
-        buf0 = cv2.flip(self.img,0)
+        buf0 = cv2.flip(self.app.img,0)
         buf1 =  buf0.tostring() 
-        self.img_texture = Texture.create(size=(self.img.shape[1],self.img.shape[0]),colorfmt=colorfmt)
+        self.img_texture = Texture.create(size=(self.app.img.shape[1],self.app.img.shape[0]),colorfmt=colorfmt)
         self.img_texture.blit_buffer(buf1, colorfmt=colorfmt, bufferfmt='ubyte')
         return self.img_texture
 

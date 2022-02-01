@@ -8,12 +8,14 @@ from UI.main_page import MainPage
 from UI.processing_page import ProcessingPage 
 from UI.load_page import LoadPage 
 from UI.save_page import SavePage
+from UI.camera_page import CameraPage
 import cv2 
 
 class MyApp(App):
     def __init__(self,**kwargs):
         super(MyApp,self).__init__(**kwargs)
         self.title = "Matrix Effects"
+        self.img = cv2.imread("UI\\Ggstokes.jpg")
 
     def build(self):
         self.screen_manager = ScreenManager()
@@ -24,6 +26,11 @@ class MyApp(App):
         self.screen_manager.add_widget(screen)
         #processing page 
         self.processing_page = None
+        #camerag page 
+        self.camera_page = CameraPage(self)
+        screen = Screen(name="camera")
+        screen.add_widget(self.camera_page)
+        self.screen_manager.add_widget(screen)
         #load page 
         self.load_page = LoadPage(self)
         screen = Screen(name="load")
@@ -41,26 +48,28 @@ class MyApp(App):
     the function creates the processing page if already not created 
     if it is created it just updates the main scene of the processing page by the new image loaded/captured by the user
     '''
-    def create_processing_page(self,img):
+    def create_processing_page(self):
         if(self.processing_page == None):
-            self.processing_page = ProcessingPage(self,img)
+            self.processing_page = ProcessingPage(self)
             screen = Screen(name="processing page")
             screen.add_widget(self.processing_page)
             self.screen_manager.add_widget(screen)
         else:
-            self.processing_page.img = img 
             self.processing_page.convert_to_texture()
             self.processing_page.update_main_scene()
     
     #swtiches the screen manager of our app to the processing page 
-    def switch_to_processing(self,_):
+    def switch_to_processing(self,dt):
         self.screen_manager.current = "processing page"
     
-    def switch_to_load(self,_):
+    def switch_to_load(self,dt):
         self.screen_manager.current = "load"
     
-    def switch_to_save(self,_):
+    def switch_to_save(self,dt):
         self.screen_manager.current = "save"
+    
+    def switch_to_camera(self,dt):
+        self.screen_manager.current = "camera"
 
 if __name__ == "__main__":
     app = MyApp()

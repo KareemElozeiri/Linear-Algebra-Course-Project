@@ -39,13 +39,12 @@ class MainPage(GridLayout):
     #function for loading image that is going to be processed 
     def load_img(self):
         # self.app.create_processing_page(cv2.imread("C:\\Kareem El-ozeiri\\Linear-Algebra-Course-Project\\UI\\img.jpg"))
-        self.status_bar.text = "loading an image"      
+        self.status_bar.text = "Opening load page.."      
         Clock.schedule_once(self.empty_status_bar,1)
         Clock.schedule_once(self.app.switch_to_load,1)
 
     #function for capturing the image that is going to be processed by the web cam of the computer 
     def capture_img(self):
-        self.app.create_processing_page(cv2.imread("C:\\Kareem El-ozeiri\\Linear-Algebra-Course-Project\\UI\\img.jpg"))
-        self.status_bar.text = "capturing an image"      
+        self.status_bar.text = "Switching to camera.."      
         Clock.schedule_once(self.empty_status_bar,1) 
-        Clock.schedule_once(self.app.switch_to_processing,1)
+        Clock.schedule_once(self.app.switch_to_camera,1)
