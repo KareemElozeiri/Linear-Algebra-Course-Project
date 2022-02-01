@@ -32,18 +32,16 @@ class MainPage(GridLayout):
         self.status_bar.height = 30
         self.add_widget(self.status_bar)
     
-   
-
     #removes the content of the status bar of the main page
     def empty_status_bar(self,*_):
         self.status_bar.text = ""
           
     #function for loading image that is going to be processed 
     def load_img(self):
-        self.app.create_processing_page(cv2.imread("C:\\Kareem El-ozeiri\\Linear-Algebra-Course-Project\\UI\\img.jpg"))
+        # self.app.create_processing_page(cv2.imread("C:\\Kareem El-ozeiri\\Linear-Algebra-Course-Project\\UI\\img.jpg"))
         self.status_bar.text = "loading an image"      
         Clock.schedule_once(self.empty_status_bar,1)
-        Clock.schedule_once(self.app.switch_to_processing,1)
+        Clock.schedule_once(self.app.switch_to_load,1)
 
     #function for capturing the image that is going to be processed by the web cam of the computer 
     def capture_img(self):
