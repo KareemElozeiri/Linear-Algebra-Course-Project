@@ -35,13 +35,9 @@ class SideBar(GridLayout):
         self.add_widget(self.median_toolbox)
         
         #save section 
-        self.save_subgrid = GridLayout(cols=2,size_hint_y=None,height=self.common_height)
-        self.save_textinput = TextInput()
-        self.save_btn = Button(text="Save",size_hint_x=None,width=50)
+        self.save_btn = Button(text="Save",size_hint_y=None,height=50)
         self.save_btn.on_press = self.save_action
-        self.save_subgrid.add_widget(self.save_textinput)
-        self.save_subgrid.add_widget(self.save_btn)
-        self.add_widget(self.save_subgrid)
+        self.add_widget(self.save_btn)
     
         #status bar section 
         self.status_bar = Label(text="",size_hint_y=None,height=self.common_height)
