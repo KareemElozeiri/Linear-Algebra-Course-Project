@@ -39,7 +39,7 @@ class LoadPage(GridLayout):
                 self.status_bar.text = "Image loaded ! Switching to processing page.."
 
                 Clock.schedule_once(self.empty_status_bar,1) 
-                Clock.schedule_once(self.app.switch_to_processing,1) 
+                Clock.schedule_once(self.app.switch_to_processing,2) 
             
             except IOError:
                 self.status_bar.text = "File chosen is not an image"

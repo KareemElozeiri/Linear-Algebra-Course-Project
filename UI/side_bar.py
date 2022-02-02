@@ -7,7 +7,7 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.clock import Clock
 from kivy.uix.textinput import TextInput
-from Backend.median_blur import median_blur
+from Effects.median_blur import median_blur
 import cv2
 
 class SideBar(GridLayout):

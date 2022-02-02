@@ -28,7 +28,7 @@ class ProcessingPage(GridLayout):
 
         self.side_bar = SideBar(self)
         self.side_bar.size_hint_x = None 
-        self.side_bar.width = 200
+        self.side_bar.width = 250
         self.add_widget(self.side_bar)
 
     #converts the image(numpy array) to the appropriate formate to be read by the image object of kivy
@@ -44,6 +44,4 @@ class ProcessingPage(GridLayout):
         self.convert_to_texture()
         self.main_scene.texture = self.img_texture
 
-
-    
     
