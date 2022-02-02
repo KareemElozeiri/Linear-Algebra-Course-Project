@@ -15,7 +15,6 @@ class ProcessingPage(GridLayout):
 
     def __init__(self,app,**kwargs):
         super(ProcessingPage,self).__init__(**kwargs)
-        
         self.app = app
         
         self.img_texture = ""
@@ -42,6 +41,7 @@ class ProcessingPage(GridLayout):
 
     #updates the frame displayed on the image object in the processing page 
     def update_main_scene(self):
+        self.convert_to_texture()
         self.main_scene.texture = self.img_texture
 
 

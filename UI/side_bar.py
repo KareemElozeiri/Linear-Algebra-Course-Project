@@ -7,7 +7,8 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.clock import Clock
 from kivy.uix.textinput import TextInput
-
+from Backend.median_blur import median_blur
+import cv2
 
 class SideBar(GridLayout):
     
@@ -22,6 +23,7 @@ class SideBar(GridLayout):
         self.gauss_kernel_label = Label(text="Kernel Size: ")
         self.gauss_kernel_textinput = TextInput()
         self.gauss_btn = Button(text="Apply Guassian Blur")
+        self.gauss_btn.on_press = self.apply_gauss
         gauss_elements = {"main_label":self.gauss_label,"kernel_label":self.gauss_kernel_label,"kernel_textinput":self.gauss_kernel_textinput,"apply_btn":self.gauss_btn}
         self.gauss_toolbox = EffectToolBox(gauss_elements)
         self.add_widget(self.gauss_toolbox)
@@ -30,6 +32,7 @@ class SideBar(GridLayout):
         self.median_kernel_label = Label(text="Kernel Size: ")
         self.median_kernel_textinput = TextInput()
         self.median_btn = Button(text="Apply Median Blur")
+        self.median_btn.on_press = self.apply_median
         median_elements = {"main_label":self.median_label,"kernel_label":self.median_kernel_label,"kernel_textinput":self.median_kernel_textinput,"apply_btn":self.median_btn}
         self.median_toolbox = EffectToolBox(median_elements)
         self.add_widget(self.median_toolbox)
@@ -44,7 +47,7 @@ class SideBar(GridLayout):
         self.add_widget(self.status_bar)
 
     #removes the content of the status bar of the processing page 
-    def empty_status_bar(self,_):
+    def empty_status_bar(self,dt):
         self.status_bar.text = ""  
 
     #saves the image after the user has applied the effects on it
@@ -52,6 +55,42 @@ class SideBar(GridLayout):
         self.status_bar.text = "saving frame..."
         Clock.schedule_once(self.empty_status_bar,1)
         Clock.schedule_once(self.master.app.switch_to_save)
+    
+    def apply_gauss(self):
+        if self.gauss_kernel_textinput.text != "":
+            try:
+                kernel_size = int(self.gauss_kernel_textinput.text.strip())
+                if kernel_size%2 !=0:
+                    self.master.app.img = cv2.GaussianBlur(self.master.app.img,(kernel_size,kernel_size),0)
+                    self.master.update_main_scene()
+                else:
+                    self.status_bar.text = "Invalid kernel size"
+                    Clock.schedule_once(self.empty_status_bar,1)
+            except ValueError:
+                self.status_bar.text = "Invalid kernel size"
+                Clock.schedule_once(self.empty_status_bar,1)
+        else:
+            self.status_bar.text = "Please add the kernel parameter"
+            Clock.schedule_once(self.empty_status_bar,1)
+
+    def apply_median(self):
+        if self.median_kernel_textinput.text != "":
+            try:
+                kernel_size = int(self.median_kernel_textinput.text.strip())
+                if kernel_size%2 !=0:
+                    self.master.app.img = cv2.medianBlur(self.master.app.img,kernel_size)
+                    self.master.update_main_scene()
+                else:
+                    self.status_bar.text = "Invalid kernel size"
+                    Clock.schedule_once(self.empty_status_bar,1)
+            except ValueError:
+                self.status_bar.text = "Invalid kernel size"
+                Clock.schedule_once(self.empty_status_bar,1)
+        else:
+            self.status_bar.text = "Please add the kernel parameter"
+            Clock.schedule_once(self.empty_status_bar,1)
+
+
       
 class EffectToolBox(GridLayout):
     def __init__(self,elements,**kwargs):

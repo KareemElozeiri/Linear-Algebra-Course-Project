@@ -17,6 +17,7 @@ class SavePage(GridLayout):
         self.save_text_input = TextInput()
         #save button 
         self.save_btn = Button(text="save")
+        self.save_btn.on_press = self.save_action
         #status bar
         self.status_bar = Label(size_hint_y=None,height=25)
 
@@ -28,4 +29,7 @@ class SavePage(GridLayout):
 
     def empty_status_bar(self,_):
         self.status_bar.text = ""
+    
+    def save_action(self):
+        self.status_bar.text = self.file_chooser.path 
 

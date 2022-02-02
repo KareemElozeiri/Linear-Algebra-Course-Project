@@ -15,7 +15,7 @@ class MyApp(App):
     def __init__(self,**kwargs):
         super(MyApp,self).__init__(**kwargs)
         self.title = "Matrix Effects"
-        self.img = cv2.imread("UI\\Ggstokes.jpg")
+        self.img = None 
 
     def build(self):
         self.screen_manager = ScreenManager()
@@ -55,7 +55,6 @@ class MyApp(App):
             screen.add_widget(self.processing_page)
             self.screen_manager.add_widget(screen)
         else:
-            self.processing_page.convert_to_texture()
             self.processing_page.update_main_scene()
     
     #swtiches the screen manager of our app to the processing page 
