@@ -69,6 +69,9 @@ class MyApp(App):
     
     def switch_to_camera(self,dt):
         self.screen_manager.current = "camera"
+    
+    def switch_to_main(self,dt):
+        self.screen_manager.current = "main"
 
 if __name__ == "__main__":
     app = MyApp()

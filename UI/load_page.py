@@ -16,16 +16,29 @@ class LoadPage(GridLayout):
         #file chooser
         self.file_chooser = FileChooserListView()
         self.add_widget(self.file_chooser)
+
+        subgrid0 = GridLayout(cols=2,size_hint_y=None,height=50)
+
         #load button 
-        self.load_btn = Button(text="Load",size_hint_y=None,height=50)
+        self.load_btn = Button(text="Load")
         self.load_btn.on_press = self.load_action
-        self.add_widget(self.load_btn)
+        subgrid0.add_widget(self.load_btn)
+        #cancel button
+        self.cancel_btn = Button(text="Cancel")
+        self.cancel_btn.on_press = self.cancel_action
+        subgrid0.add_widget(self.cancel_btn)
+
+        self.add_widget(subgrid0)
         #status bar
         self.status_bar = Label(size_hint_y=None,height=50)
         self.add_widget(self.status_bar)
     
-    def empty_status_bar(self,_):
+    def empty_status_bar(self,dt):
         self.status_bar.text = ""
+    
+    def cancel_action(self):
+        Clock.schedule_once(self.app.switch_to_main,0.5)
+
     '''
     checks that the file to be loaded is an image 
     reads the image if so and sets it to the app.img properity
