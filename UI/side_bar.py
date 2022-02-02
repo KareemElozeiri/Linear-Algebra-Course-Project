@@ -41,6 +41,16 @@ class SideBar(GridLayout):
         self.save_btn = Button(text="Save",size_hint_y=None,height=50)
         self.save_btn.on_press = self.save_action
         self.add_widget(self.save_btn)
+
+        #switch to load page button 
+        self.load_btn = Button(text="Load",size_hint_y=None,height=50)
+        self.load_btn.on_press = self.back_to_load
+        self.add_widget(self.load_btn)
+
+        #switch to camera button 
+        self.camera_btn = Button(text="Camera",size_hint_y=None,height=50)
+        self.camera_btn.on_press = self.back_to_camera
+        self.add_widget(self.camera_btn)
     
         #status bar section 
         self.status_bar = Label(text="",size_hint_y=None,height=self.common_height)
@@ -55,6 +65,19 @@ class SideBar(GridLayout):
         self.status_bar.text = "saving frame..."
         Clock.schedule_once(self.empty_status_bar,1)
         Clock.schedule_once(self.master.app.switch_to_save)
+    
+    
+    def back_to_camera(self):
+        self.status_bar.text = "Opening the camera.."
+        Clock.schedule_once(self.master.app.switch_to_camera,1)
+        Clock.schedule_once(self.empty_status_bar,1)
+ 
+    
+    def back_to_load(self):
+        self.status_bar.text = "Opening the load page.."
+        Clock.schedule_once(self.master.app.switch_to_load,1) 
+        Clock.schedule_once(self.empty_status_bar,1)
+
     
     def apply_gauss(self):
         if self.gauss_kernel_textinput.text != "":
