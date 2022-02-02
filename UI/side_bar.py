@@ -84,8 +84,10 @@ class SideBar(GridLayout):
             try:
                 kernel_size = int(self.gauss_kernel_textinput.text.strip())
                 if kernel_size%2 !=0:
+                    self.status_bar.text = "Gaussian blur applied"
                     self.master.app.img = cv2.GaussianBlur(self.master.app.img,(kernel_size,kernel_size),0)
                     self.master.update_main_scene()
+                    Clock.schedule_once(self.empty_status_bar,1)
                 else:
                     self.status_bar.text = "Invalid kernel size"
                     Clock.schedule_once(self.empty_status_bar,1)
@@ -101,8 +103,10 @@ class SideBar(GridLayout):
             try:
                 kernel_size = int(self.median_kernel_textinput.text.strip())
                 if kernel_size%2 !=0:
+                    self.status_bar.text = "median blur applied"
                     self.master.app.img = cv2.medianBlur(self.master.app.img,kernel_size)
                     self.master.update_main_scene()
+                    Clock.schedule_once(self.empty_status_bar,1)
                 else:
                     self.status_bar.text = "Invalid kernel size"
                     Clock.schedule_once(self.empty_status_bar,1)
